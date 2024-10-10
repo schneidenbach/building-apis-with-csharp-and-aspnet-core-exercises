@@ -1,0 +1,12 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "TheEmployees",
+            "database": "${workspaceFolder:4-H-extending-your-data-model-and-model-configuration}/TheEmployeeAPI/employees.db"
+        }
+    ],
+    "r.lsp.promptToInstall": false
+}

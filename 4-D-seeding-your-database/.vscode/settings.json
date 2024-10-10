@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "TheEmployees",
+            "database": "${workspaceFolder:4-E-seeding-your-database}/TheEmployeeAPI/employees.db"
+        }
+    ]
+}

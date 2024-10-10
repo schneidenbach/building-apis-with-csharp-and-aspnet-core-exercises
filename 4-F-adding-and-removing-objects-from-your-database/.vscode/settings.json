@@ -1,0 +1,18 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "TheEmployees",
+            "database": "${workspaceFolder:4-F-querying-basics}/TheEmployeeAPI/employees.db"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "in memory",
+            "database": ":memory:"
+        }
+    ],
+    "r.lsp.promptToInstall": false
+}

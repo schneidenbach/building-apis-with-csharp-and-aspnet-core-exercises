@@ -1,0 +1,12 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "TheEmployees",
+            "database": "${workspaceFolder:4-J-auditing-and-automatic-application-of-properties}/TheEmployeeAPI/employees.db"
+        }
+    ],
+    "r.lsp.promptToInstall": false
+}
