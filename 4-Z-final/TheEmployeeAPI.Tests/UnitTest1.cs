@@ -119,6 +119,7 @@ public class BasicTests : IClassFixture<CustomWebApplicationFactory>
         var employee = await db.Employees.FindAsync(1);
         Assert.Equal("123 Main Smoot", employee.Address1);
         Assert.Equal(CustomWebApplicationFactory.SystemClock.UtcNow.UtcDateTime, employee.LastModifiedOn);
+        Assert.Equal("test@test.com", employee.LastModifiedBy);
     }
 
     [Fact]
@@ -189,7 +190,7 @@ public class BasicTests : IClassFixture<CustomWebApplicationFactory>
     {
         var resp = await client.PostAsJsonAsync("security/generateAVeryInsecureToken_pleasedontusethisever", new
         {
-            role = role
+            role = role, username = "test@test.com"
         });
         resp.EnsureSuccessStatusCode();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await resp.Content.ReadAsStringAsync());

@@ -4,10 +4,16 @@ using Microsoft.Extensions.Internal;
 public class AppDbContext : DbContext
 {
     private readonly ISystemClock _systemClock;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AppDbContext(DbContextOptions<AppDbContext> options, ISystemClock systemClock) : base(options)
+    public AppDbContext(
+        DbContextOptions<AppDbContext> options, 
+        ISystemClock systemClock, 
+        IHttpContextAccessor httpContextAccessor
+    ) : base(options)
     {
         this._systemClock = systemClock;
+        this._httpContextAccessor = httpContextAccessor;
     }
 
     public DbSet<Employee> Employees { get; set; }
@@ -41,13 +47,13 @@ public class AppDbContext : DbContext
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedBy = "TheCreateUser";
+                entry.Entity.CreatedBy = _httpContextAccessor?.HttpContext?.User?.Identity?.Name;
                 entry.Entity.CreatedOn = _systemClock.UtcNow.UtcDateTime;
             }
 
             if (entry.State == EntityState.Modified)
             {
-                entry.Entity.LastModifiedBy = "TheUpdateUser";
+                entry.Entity.LastModifiedBy = _httpContextAccessor?.HttpContext?.User?.Identity?.Name;
                 entry.Entity.LastModifiedOn = _systemClock.UtcNow.UtcDateTime;
             }
         }

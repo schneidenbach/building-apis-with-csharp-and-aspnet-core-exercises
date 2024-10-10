@@ -20,7 +20,7 @@ namespace TheEmployeeAPI.Security
         [HttpPost("generateAVeryInsecureToken_pleasedontusethisever")]
         public IActionResult GetToken([FromBody] GetTokenRequestBody request)
         {
-            return Ok(HttpContext.GenerateJwt(request.Role));
+            return Ok(HttpContext.GenerateJwt(request.Role, request.Username));
         }
     }
 }

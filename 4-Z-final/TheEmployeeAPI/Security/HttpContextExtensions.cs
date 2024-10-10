@@ -10,7 +10,7 @@ namespace TheEmployeeAPI.Security
         /// <summary>
         /// Note: you should NEVER use code like this in a production scenario.
         /// </summary>
-        public static string GenerateJwt(this HttpContext context, string role)
+        public static string GenerateJwt(this HttpContext context, string role, string username)
         {
             var config = context.RequestServices.GetRequiredService<IConfiguration>();
             var id = Guid.NewGuid().ToString();
@@ -18,7 +18,8 @@ namespace TheEmployeeAPI.Security
             {
                 new Claim(JwtRegisteredClaimNames.Sub, id),
                 new Claim(JwtRegisteredClaimNames.Jti, id),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Name, username)
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Tokens:Key"]!));
